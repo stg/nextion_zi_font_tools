@@ -655,7 +655,11 @@ void zi_make_utf8(const char *file_name, const zi_font_t *font) {
   H[0x1C] = 0xFF; // ?
   H[0x1E] = 0x01; // ?
   H[0x1F] = 1;    // variable width
-  H[0x20] = 0x06; // ?
+	if(desc_len > 5 && !strcmp(&font_name[desc_len - 5], "utf-8")) {
+		H[0x20] = desc_len - 5; // description shown
+	} else {
+		H[0x20] = desc_len; // description shown
+	}
   H[0x21] = align8 ? 0x01 : 0x00;          // offsets are divided by 8 or not
   H[0x24] = (uint8_t)(glyph_count & 0xFF); // subset_actual
   H[0x25] = (uint8_t)((glyph_count >> 8) & 0xFF);
