@@ -216,7 +216,7 @@ void check_glyph(glyph_t * g) {
 int main(int argc, char *argv[]) {
 
 	if(argc != 2) {
-		printf("Use: %s <font>\n", argv[0]);
+		printf("Usage: %s <font> (omit .fnt)\n", argv[0]);
 		return 1;
 	}
 
@@ -383,7 +383,7 @@ int main(int argc, char *argv[]) {
 				p_block += 10;
 				block_size -= 10;
 			}
-			if(v_out) printf("Kerning applied\n");
+			if(v_out) printf("Kerning processed\n");
 		}
 	}
 
@@ -392,7 +392,7 @@ int main(int argc, char *argv[]) {
 	
 	// Output glyph data
 
- printf("Preparing ZI font output...\n");
+ printf("Preparing ZI font output\n");
 
 	//Determine maximum height
 	int8_t min_h = 0;
@@ -416,16 +416,9 @@ int main(int argc, char *argv[]) {
 
 	for (uint16_t i = 0; i < glyph_count; i++) {
 		
-			if(glyph[i].x < 0 || glyph[i].y < 0) {
-				printf("break %d %d\n", glyph[i].x, glyph[i].y);
-			}
-		
 			int full_w = glyph[i].x + glyph[i].w;   // include left offset
 			int full_h = max_h;
 			if(full_w < glyph[i].a) full_w = glyph[i].a;
-
-			printf("%u %u\n", full_w, full_h);
-			//printf("%u\n", (size_t)full_w * full_h, 1);
 			
 			uint8_t *dst = calloc((size_t)full_w * full_h, 1); // cleared background
 			uint8_t *src = glyph[i].data;

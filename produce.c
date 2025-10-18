@@ -83,8 +83,8 @@ static int parse_glyph_filename(const char *font_name,
 }
 
 static int glyph_compare(const void *a, const void *b) {
-  const glyph_t *ga = (const glyph_t *)a;
-  const glyph_t *gb = (const glyph_t *)b;
+  const zi_glyph_t *ga = (const zi_glyph_t *)a;
+  const zi_glyph_t *gb = (const zi_glyph_t *)b;
   if (ga->c < gb->c) return -1;
   if (ga->c > gb->c) return 1;
   return 0;
@@ -106,7 +106,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  glyph_t *glyphs = NULL;
+  zi_glyph_t *glyphs = NULL;
   size_t cap = 0, count = 0;
   struct dirent *de;
 
@@ -127,7 +127,7 @@ int main(int argc, char **argv) {
 
     if (count == cap) {
       cap = cap ? cap * 2 : 64;
-      glyphs = realloc(glyphs, cap * sizeof(glyph_t));
+      glyphs = realloc(glyphs, cap * sizeof(zi_glyph_t));
       if (!glyphs) {
         perror("realloc");
         closedir(dir);
@@ -149,7 +149,7 @@ int main(int argc, char **argv) {
   }
 
   // sort by codepoint (important for predictable charmap)
-  qsort(glyphs, count, sizeof(glyph_t), glyph_compare);
+  qsort(glyphs, count, sizeof(zi_glyph_t), glyph_compare);
 
   printf("Loaded %zu glyphs, building %s ...\n", count, out_file);
 
