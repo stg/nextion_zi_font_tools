@@ -1,6 +1,6 @@
 ## Tools to read and write iTead Nextion .zi font files, for your pleasure.
 
-Also provided is a tool to convert BMFont files to ZI format. Why? Because the built-in font generator kind of sucks and won't even anti-alias the small fonts that need it the most. Also, it's just nice to have full control over your resources in those odd cases when you need to do something out of the ordinary. Oh, and it also produces ever so slightly smaller font files - just a few bytes here and there, not enough to matter beyond stroking the ego.
+**Also provided is a tool to convert BMFont files to ZI format.** Why? Because the built-in font generator kind of sucks and won't even anti-alias the small fonts that need it the most. Also, it's just nice to have full control over your resources in those odd cases when you need to do something out of the ordinary. Oh, and it also produces ever so slightly smaller font files - just a few bytes here and there, not enough to matter beyond stroking the ego.
 
 ### Features:
 
@@ -52,6 +52,7 @@ Will produce a .zi file from a .fnt file with accompanying .tga or .png glyph at
 
 - https://github.com/elanthis/upng
 - https://github.com/hagronnestad/nextion-font-editor
+
 
 
 
