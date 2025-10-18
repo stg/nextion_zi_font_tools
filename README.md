@@ -4,7 +4,7 @@ Also provided is a tool to convert BMFont files to ZI format. Why? Because the b
 
 ### Features:
 
-- Read and write ZI v6 font format
+- Read and write ZI v6 [header@0x10=0x06] font format
 - UTF-8 unicode
 - Anti-aliasing
 - Variable width
@@ -12,7 +12,7 @@ Also provided is a tool to convert BMFont files to ZI format. Why? Because the b
 
 ### Caveats:
 
-- Only ZIv6 format supported
+- Only ZI v6 format supported
 - Only UTF-8 - no ASCII or code-pages
 - This is **not** quality code, it is quick-and-dirty, hack'n'slash, untested, drunken-foo, late-night, proof-of-concept code
 - That said, it does seem to work at least for the few use cases I've had.
@@ -49,4 +49,5 @@ Will produce a .zi file from a .fnt file with accompanying .tga or .png glyph at
 
 - https://github.com/elanthis/upng
 - https://github.com/hagronnestad/nextion-font-editor
+
 
