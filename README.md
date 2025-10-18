@@ -25,27 +25,23 @@ Also provided is a tool to convert BMFont files to ZI format. Why? Because the b
 
 ### To compile (sorry, all files in one directory... I already warned you - it's messy):
 
-```gcc parse.c zi_font.c -oparse```
-
-Builds .zi file parser. Usage: parse <font.zi>
+```gcc parse.c zi_font.c -oparse```  
+Builds .zi file parser. Usage: parse <font.zi>  
 Will print font properties and write all glyphs to .tga files in current directory.
 
 
-```gcc produce.c zi_font.c -oproduce```
-
-Build .zi file producer. Usage: produce <output.zi> <font_name> <height>
+```gcc produce.c zi_font.c -oproduce```  
+Build .zi file producer. Usage: produce <output.zi> <font_name> <height>  
 Will produce a .zi file from properties by arguments, using .tga files in current directory as glyphs.
 
 
-```gcc repack.c zi_font.c -orepack```
-
-Build .zi file re-packer. Usage: repack <input.zi> <output.zi>
+```gcc repack.c zi_font.c -orepack```  
+Build .zi file re-packer. Usage: repack <input.zi> <output.zi>  
 Will produce a .zi file from another .zi file, to verify zi_font.c operation.
 
 
-```gcc bmf_to_zi.c zi_font.c upng.c -obmf_to_zi```
-
-Build BMFont Binary .fnt to .zi conversion tool. Usage: bmf_to_zi <font> (omit .fnt)
+```gcc bmf_to_zi.c zi_font.c upng.c -obmf_to_zi```  
+Build BMFont Binary .fnt to .zi conversion tool. Usage: bmf_to_zi <font> (omit .fnt)  
 Will produce a .zi file from a .fnt file with accompanying .tga or .png glyph atlas.
 
 
@@ -53,3 +49,4 @@ Will produce a .zi file from a .fnt file with accompanying .tga or .png glyph at
 
 - https://github.com/elanthis/upng
 - https://github.com/hagronnestad/nextion-font-editor
+
