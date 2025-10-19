@@ -7,6 +7,10 @@ This completes a 3rd party toolchain to make/generate Nextion ZI font files with
 
 Because the built-in font generator leaves some things desired. For example, anti-aliasing the small fonts that need it the most. Also, it's just nice to have full control over your resources in those odd cases when you need to do something out of the ordinary. Oh, and it also produces ever so slightly smaller font files - just a few bytes here and there, not enough to matter beyond stroking the ego.
 
+### Download
+
+Windows pre-compiled binaries are found under Releases.
+
 ### Features:
 
 - Read and write ZI v6 [header@0x10=0x06] font format
@@ -91,6 +95,7 @@ Describes a glyph. Data is always height*w bytes, 8-bit greyscale, left-to-right
 
 - https://github.com/elanthis/upng
 - https://github.com/hagronnestad/nextion-font-editor
+
 
 
 
