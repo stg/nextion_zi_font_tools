@@ -9,7 +9,7 @@ Because the built-in font generator leaves some things desired. For example, ant
 
 ### Download
 
-Windows pre-compiled binaries are found under Releases.
+Windows pre-compiled binaries are found under [Releases](https://github.com/stg/nextion_zi_font_tools/releases).
 
 ### Features:
 
@@ -34,7 +34,7 @@ Windows pre-compiled binaries are found under Releases.
 - https://www.angelcode.com/products/bmfont/
 - https://github.com/vladimirgamalyan/fontbm
 
-See examples/xxx/README.md on how to use each of these tools.
+See [examples/](https://github.com/stg/nextion_zi_font_tools/tree/main/examples)xxx/README.md on how to use each of these tools.
 
 ### To compile:
 
@@ -95,6 +95,7 @@ Describes a glyph. Data is always height*w bytes, 8-bit greyscale, left-to-right
 
 - https://github.com/elanthis/upng
 - https://github.com/hagronnestad/nextion-font-editor
+
 
 
 
