@@ -1,6 +1,11 @@
 ## Tools to read and write iTead Nextion .zi font files, for your pleasure.
 
-**Also provided is a tool to convert BMFont files to ZI format.** Why? Because the built-in font generator kind of sucks and won't even anti-alias the small fonts that need it the most. Also, it's just nice to have full control over your resources in those odd cases when you need to do something out of the ordinary. Oh, and it also produces ever so slightly smaller font files - just a few bytes here and there, not enough to matter beyond stroking the ego.
+**Also provided is a tool to convert BMFont files to ZI format.**  
+This completes a 3rd party toolchain to make/generate Nextion ZI font files without relingy on the Nextion Editor built-in font generator tool.  
+
+### Why?
+
+Because the built-in font generator leaves some things desired. For example, anti-aliasing the small fonts that need it the most. Also, it's just nice to have full control over your resources in those odd cases when you need to do something out of the ordinary. Oh, and it also produces ever so slightly smaller font files - just a few bytes here and there, not enough to matter beyond stroking the ego.
 
 ### Features:
 
@@ -25,33 +30,68 @@
 - https://www.angelcode.com/products/bmfont/
 - https://github.com/vladimirgamalyan/fontbm
 
+See examples/xxx/README.md on how to use each of these tools.
 
-### To compile (sorry, all files in one directory... I already warned you - it's messy):
+### To compile:
 
-```gcc parse.c zi_font.c -oparse```  
+```make```  
+
+This produces all tool binaries in bin/  
+
+### The tools, how to use, and how to compile manually:  
+
+```gcc src/parse.c lib/zi_font.c -Ilib -obin/parse```  
 Builds .zi file parser. Usage: parse <font.zi>  
 Will print font properties and write all glyphs to .tga files in current directory.
 
 
-```gcc produce.c zi_font.c -oproduce```  
+```gcc src/produce.c lib/zi_font.c -Ilib -obin/produce```  
 Build .zi file producer. Usage: produce <output.zi> <font_name> <height>  
 Will produce a .zi file from properties by arguments, using .tga files in current directory as glyphs.
 
 
-```gcc repack.c zi_font.c -orepack```  
+```gcc src/repack.c lib/zi_font.c -Ilib -obin/repack```  
 Build .zi file re-packer. Usage: repack <input.zi> <output.zi>  
 Will produce a .zi file from another .zi file, to verify zi_font.c operation.
 
 
-```gcc bmf_to_zi.c zi_font.c upng.c -obmf_to_zi```  
+```gcc src/bmf_to_zi.c lib/zi_font.c lib/upng.c -Ilib -obin/bmf_to_zi```  
 Build BMFont Binary .fnt to .zi conversion tool. Usage: bmf_to_zi <font> (omit .fnt)  
 Will produce a .zi file from a .fnt file with accompanying .tga or .png glyph atlas.
+
+## Internally:
+
+```
+typedef struct {
+	char *font_name;      // description string from .zi header
+	uint8_t height;       // height of each glyph
+	uint32_t glyph_count; // number of glyphs in list
+	zi_glyph_t *glyphs;   // pointer to list of glyphs
+} zi_font_t;
+```
+
+Describes a font.
+
+```
+typedef struct {
+  uint16_t c;    // unicode codepoint
+  uint8_t w;     // width
+  uint8_t *data; // pixel data
+} zi_glyph_t;
+```
+
+Describes a glyph. Data is always height*w bytes, 8-bit greyscale, left-to-right, top-down.
+
+```zi_font_t * zi_load(const char *file_name);``` Load ZI file ```file_name``` and return pointer to dynamically allocated ```zi_font_t```  
+```void zi_free(zi_font_t *font);``` Free ```zi_font_t``` memory when done  
+```void zi_make_utf8(const char *file_name, const zi_font_t *font);``` Produce ZI file ```file_name``` from ```font```
 
 
 ### Shout outs:
 
 - https://github.com/elanthis/upng
 - https://github.com/hagronnestad/nextion-font-editor
+
 
 
 
