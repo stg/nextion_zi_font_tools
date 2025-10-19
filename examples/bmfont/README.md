@@ -7,6 +7,6 @@ Get BMFont from https://www.angelcode.com/products/bmfont/
 - Run BMFont
 - Load configuration Hyperlegible.bmfc
 - Save bitmap font as Hyperlegible.fnt (also produces Hyperlegible_0.tga)
-- Run ```bmf_to_zi.exe``` Hyperlegible
-- This produces Hyperlegible.zi
+- Run ```bmf_to_zi.exe Hyperlegible``` to produce Hyperlegible.zi
+
 
