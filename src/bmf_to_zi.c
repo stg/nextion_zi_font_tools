@@ -234,7 +234,7 @@ int main(int argc, char *argv[]) {
 
 	uint8_t * p_font = font;
 	
-	tga_t ** tga;
+	tga_t ** tga = NULL;
 	
 	// Check magic
 	if(memcmp(p_font, "BMF", 3)) {
@@ -249,7 +249,7 @@ int main(int argc, char *argv[]) {
 	}
 	p_font += 1; // Skip version
 	
-	while((p_font - font) < font_size) {
+	while((uintptr_t)(p_font - font) < font_size) {
 		uint8_t block_type = *p_font;
 		p_font += 1;
 		uint32_t block_size = *(uint32_t *)p_font;
@@ -269,7 +269,7 @@ int main(int argc, char *argv[]) {
 			tga = malloc(*(uint16_t *)p_block * sizeof(tga_t *));
 			if(v_out) printf("OK\n");
 		} else if(block_type == 3) { // pages
-			uint8_t n;
+			uint8_t n = 0;
 			while(block_size) {
 				size_t tga_size = 0;
 				if(v_out) printf("Loading %s\n", p_block);
