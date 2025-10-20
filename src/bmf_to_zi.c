@@ -401,7 +401,7 @@ int main(int argc, char *argv[]) {
 	}
 	for (uint16_t i = 0; i < glyph_count; i++) {
 		glyph[i].y -= min_h;
-		glyph[i].x = 0;
+		if(glyph[i].x < 0) glyph[i].x = 0;
 	}
 	uint8_t max_h = 0;
 	for (uint16_t i = 0; i < glyph_count; i++) {
@@ -416,6 +416,7 @@ int main(int argc, char *argv[]) {
 
 	for (uint16_t i = 0; i < glyph_count; i++) {
 		
+
 			int full_w = glyph[i].x + glyph[i].w;   // include left offset
 			int full_h = max_h;
 			if(full_w < glyph[i].a) full_w = glyph[i].a;
@@ -435,7 +436,9 @@ int main(int argc, char *argv[]) {
 			zi_glyphs[i].w = full_w;
 			zi_glyphs[i].data = dst;
 
-			//free(src); // release original bitmap
+			printf("Glyph U+%04X  width=%u\n", zi_glyphs[i].c, zi_glyphs[i].w);
+
+			free(src); // release original bitmap
 	}
 
 	// Build font struct for ZI

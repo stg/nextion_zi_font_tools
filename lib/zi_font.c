@@ -698,7 +698,7 @@ void zi_make_utf8(const char *file_name, const zi_font_t *font) {
     cur += (long)chunk;
   }
 
-  // Write glyph streams with 8-byte padding between them (to match the stored starts)
+  // Write glyph streams (optionally with padding) between them
   for (uint32_t i = 0; i < glyph_count; i++) {
     // ensure current file pos == cmap_off + (gi[i].start_div8 * 8)
     long need = (long)cmap_off + (long)(gi[i].start_div8 * (align8 ? 8u : 1u));
