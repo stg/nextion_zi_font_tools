@@ -11,6 +11,11 @@ Because the built-in font generator leaves some things desired. For example, ant
 
 Windows pre-compiled binaries are found under [Releases](https://github.com/stg/nextion_zi_font_tools/releases).
 
+### Shout outs:
+
+- https://github.com/hagronnestad/nextion-font-editor reverse engineering work and docs
+- https://github.com/elanthis/upng used for decoding png images
+
 ### Features:
 
 - Read and write ZI v6 [header@0x10=0x06] font format
@@ -91,12 +96,6 @@ Describes a glyph. Data is always height*w bytes, 8-bit greyscale, left-to-right
 ```void zi_make_utf8(const char *file_name, const zi_font_t *font);``` Produce ZI file ```file_name``` from ```font```
 
 
-### Shout outs:
-
-- https://github.com/hagronnestad/nextion-font-editor reverse engineering work and docs
-- https://github.com/elanthis/upng used for decoding png images
-
-
 ### Full resource control benefits:
 
 <img src="examples/rainbow.jpg" alt="Rainbow Example" width="360">
@@ -104,3 +103,4 @@ Describes a glyph. Data is always height*w bytes, 8-bit greyscale, left-to-right
 This example with outlined, shaded, and highlighted text was produced by splitting a bitmap font into multiple planes, each written to its own ZI font.
 These are then drawn on top of each other, with a distinct color for each plane.
 No code for this, too messy, image included only to demonstrate the benefits of full resource control and software interoperability.
+
