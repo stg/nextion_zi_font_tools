@@ -1,11 +1,11 @@
 ## Tools to read and write iTead Nextion .zi font files, for your pleasure.
 
 **Also provided is a tool to convert BMFont files to ZI format.**  
-This completes a 3rd party toolchain to make/generate Nextion ZI font files without relingy on the Nextion Editor built-in font generator tool.  
+This completes a 3rd party toolchain to make/generate Nextion ZI font files without relying on the Nextion Editor built-in font generator tool.  
 
 ### Why?
 
-Because the built-in font generator leaves some things desired. For example, anti-aliasing the small fonts that need it the most. Also, it's just nice to have full control over your resources in those odd cases when you need to do something out of the ordinary. Oh, and it also produces ever so slightly smaller font files - just a few bytes here and there, not enough to matter beyond stroking the ego.
+Because the built-in font generator leaves some things desired. For example, anti-aliasing the small fonts that need it the most. Also, it's just nice to have full control over your resources in those odd cases when you need to do something out of the ordinary, like the multicolor text example at the end of this README. Oh, and it also produces ever so slightly smaller font files - just a few bytes here and there, not enough to matter beyond stroking the ego.
 
 ### Download
 
@@ -93,17 +93,14 @@ Describes a glyph. Data is always height*w bytes, 8-bit greyscale, left-to-right
 
 ### Shout outs:
 
-- https://github.com/elanthis/upng
-- https://github.com/hagronnestad/nextion-font-editor
+- https://github.com/hagronnestad/nextion-font-editor reverse engineering work and docs
+- https://github.com/elanthis/upng used for decoding png images
 
 
+### Full resource control benefits:
 
+<img src="examples/rainbow.jpg" alt="Rainbow Example" width="360">
 
-
-
-
-
-
-
-
-
+This example with outlined, shaded, and highlighted text was produced by splitting a bitmap font into multiple planes, each written to its own ZI font.
+These are then drawn on top of each other, with a distinct color for each plane.
+No code for this, too messy, image included only to demonstrate the benefits of full resource control and software interoperability.
