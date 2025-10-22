@@ -109,12 +109,12 @@ uint8_t *sample_rect_tga(tga_t * tga, uint16_t x, uint16_t y, uint8_t w, uint8_t
 static char tga_fn[256];
 
 // Convert PNG to TGA
-int png_to_tga() {
+int png_to_tga(char * fn) {
 	FILE* fh;
 	upng_t* upng;
 	unsigned width, height, depth;
 	
-	upng = upng_new_from_file(tga_fn);
+	upng = upng_new_from_file(fn);
 	if (upng_get_error(upng) != UPNG_EOK) {
 		printf("Unable to read PNG (%d)\n", upng_get_error(upng));
 		return 2;
@@ -145,12 +145,12 @@ int png_to_tga() {
 		printf("Out of memory\n");
 		return 1;
 	};
-	if(strlen(tga_fn) >= sizeof(tga_fn) - 4) {
+	if(strlen(fn) >= sizeof(tga_fn) - 4) {
 		printf("Filename too long\n");
 		return 1;
 	};
-	strcat(tga_fn, ".tga");
-	fh = fopen(tga_fn, "wb");
+	strcat(fn, ".tga");
+	fh = fopen(fn, "wb");
 	fprintf(fh, "%c%c%c", 0, 0, 3);
 	fprintf(fh, "%c%c%c%c%c", 0, 0, 0, 0, 0);
 	fprintf(fh, "%c%c%c%c%c%c%c%c%c%c", 0, 0, 0, 0, LO(width), HI(width), LO(height), HI(height), 8, 0);
@@ -278,18 +278,21 @@ int main(int argc, char *argv[]) {
 			while(block_size) {
 				size_t tga_size = 0;
 				if(v_out) printf("Loading %s\n", p_block);
-				// Convert PNG (from modern tools) to TGA (what this was designed for)
+				// Convert PNG (from modern tools) to TGA (what this was originally designed for)
 				if(strlen((const char *)p_block) >= sizeof(tga_fn)) {
 						printf("Filename too long\n");
 						return 1;
 				}
 				strcpy(tga_fn, (const char *)p_block);
+				bool temp_tga = false;
 				if(ends_with_png(p_block)) {
-					if(png_to_tga(p_block)) {
+					temp_tga = true;
+					if(png_to_tga(tga_fn)) { // also changes tga_fn
 						return 1;
 					}
 				}
 				tga[n] = (tga_t *)blob(tga_fn, &tga_size);
+				if(temp_tga) remove(tga_fn);
 				size_t skip = strlen((const char *)p_block) + 1;
 				block_size -= skip;
 				p_block += skip;
