@@ -184,13 +184,18 @@ bool ends_with_png(const uint8_t *p_block) {
             tolower(ext[3]) == 'g');
 }
 
+// Same as used in ZI
+static inline uint8_t q3(uint8_t v8) {
+  return (uint8_t)((v8 * 7 + 127) / 255);
+}
+
 void check_glyph(glyph_t * g) {
 	const uint8_t threshold = 0;
 	uint16_t x1 = 0, y1 = 0;
 	uint16_t x0 = g->w, y0 = g->h;
 	for(uint16_t y = 0; y < g->h; y++) {
 		for(uint16_t x = 0; x < g->w; x++) {
-			if(g->data[y * g->w + x] > threshold) {
+			if(q3(g->data[y * g->w + x]) > threshold) {
 				if(x < x0) x0 = x;
 				if(x + 1 > x1) x1 = x + 1;
 				if(y < y0) y0 = y;
