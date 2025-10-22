@@ -9,7 +9,7 @@ void emit_zi_font(zi_font_t *font, const char *varname, uint8_t lightness) {
     printf("// Auto-generated compact font data for \"%s\"\n", font->font_name);
     printf("// Each glyph row packed 8 pixels per byte (MSB left)\n\n");
 
-    // 1. Emit packed glyph data
+    // Emit packed glyph data
     printf("static const uint8_t %s_data[] = {\n", varname);
     size_t offset = 0;
     for (uint32_t gi = 0; gi < font->glyph_count; gi++) {
@@ -42,7 +42,7 @@ void emit_zi_font(zi_font_t *font, const char *varname, uint8_t lightness) {
     if (offset % 16) printf("\n");
     printf("};\n\n");
 
-    // 2. Emit glyph table
+    // Emit glyph table
     printf("static const zi_glyph_t %s_glyphs[] = {\n", varname);
     size_t pos = 0;
     for (uint32_t gi = 0; gi < font->glyph_count; gi++) {
@@ -55,7 +55,7 @@ void emit_zi_font(zi_font_t *font, const char *varname, uint8_t lightness) {
     }
     printf("};\n\n");
 
-    // 3. Emit font structure
+    // Emit font structure
     printf("const zi_font_t %s = {\n", varname);
     printf("  %u,\n", font->height);
     printf("  %u,\n", font->glyph_count);

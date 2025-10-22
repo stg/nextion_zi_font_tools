@@ -220,9 +220,14 @@ void check_glyph(glyph_t * g) {
 // Essentially junk code, but will work until it's fed bad data.
 int main(int argc, char *argv[]) {
 
-	if(argc != 2) {
-		printf("Usage: %s <font> (omit .fnt)\n", argv[0]);
+	if(argc < 3) {
+		printf("Usage: %s <font-without-fnt> (<pad-to-height>)\n", argv[0]);
 		return 1;
+	}
+
+	int pad_height = 0;
+	if(argc >= 3) {
+			pad_height = atoi(argv[2]);
 	}
 
 	char fn[256];
@@ -413,11 +418,14 @@ int main(int argc, char *argv[]) {
 	}
 	uint8_t max_h = 0;
 	for (uint16_t i = 0; i < glyph_count; i++) {
-			int bottom = glyph[i].y + glyph[i].h;
-			if (bottom > max_h)
-					max_h = bottom;
+		int bottom = glyph[i].y + glyph[i].h;
+		if (bottom > max_h) max_h = bottom;
 	}
 	printf("Detected font height: %u px\n", max_h);
+	if(max_h < pad_height) {
+		max_h = pad_height;
+		printf("Padding height to: %u px\n", max_h);
+	}
 
 	// Make unified glyph array for ZI
 	zi_glyph_t *zi_glyphs = calloc(glyph_count, sizeof(glyph_t));
@@ -444,7 +452,7 @@ int main(int argc, char *argv[]) {
 			zi_glyphs[i].w = full_w;
 			zi_glyphs[i].data = dst;
 
-			printf("Glyph U+%04X  width=%u\n", zi_glyphs[i].c, zi_glyphs[i].w);
+			printf("Glyph U+%04X(%lc) w=%u h=%u\n", zi_glyphs[i].c, (wchar_t)zi_glyphs[i].c, zi_glyphs[i].w, glyph[i].y + glyph[i].h);
 
 			free(src); // release original bitmap
 	}
