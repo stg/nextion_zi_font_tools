@@ -617,7 +617,7 @@ void zi_make_utf8(const char *file_name, const zi_font_t *font) {
   
 	uint8_t desc_len = (uint8_t)strlen(font_name);
   uint32_t cmap_off = 0x2C + desc_len;                       // file offset where charmap begins
-  uint32_t base_from_cmap = align_up(10u * glyph_count, 8u); // first glyph start (bytes from charmap start)
+  uint32_t base_from_cmap = align_up(10u * glyph_count, align8 ? 8u : 1u); // first glyph start (bytes from charmap start)
 
   // Compute start for each glyph
   uint32_t cur_from_cmap = base_from_cmap;
