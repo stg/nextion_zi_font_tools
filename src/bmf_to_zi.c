@@ -1,3 +1,5 @@
+//  DS Prototyp 2025 D.W.Taylor [senseitg@gmail.com]
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -205,7 +207,6 @@ void check_glyph(glyph_t * g) {
 	}
 	if(x0 > x1) x0 = x1 = 0;
 	if(y0 > y1) y0 = y1 = 0;
-
 	uint8_t *data = sample_rect(g->data, g->w, x0, y0, x1 - x0, y1 - y0, &(g->data_size));
 	free(g->data);
 	g->data = data;
@@ -220,7 +221,7 @@ void check_glyph(glyph_t * g) {
 // Essentially junk code, but will work until it's fed bad data.
 int main(int argc, char *argv[]) {
 
-	if(argc < 3) {
+	if(argc < 2) {
 		printf("Usage: %s <font-without-fnt> (<pad-to-height>)\n", argv[0]);
 		return 1;
 	}
@@ -408,18 +409,20 @@ int main(int argc, char *argv[]) {
  printf("Preparing ZI font output\n");
 
 	//Determine maximum height
-	int8_t min_h = 0;
+	int8_t min_h = glyph[glyph_count - 1].y;
 	for (uint16_t i = 0; i < glyph_count; i++) {
-			if(glyph[i].y < min_h) min_h = glyph[i].y;
+		if(glyph[i].h && glyph[i].y < min_h) min_h = glyph[i].y;
 	}
 	for (uint16_t i = 0; i < glyph_count; i++) {
-		glyph[i].y -= min_h;
+		if(glyph[i].h) glyph[i].y -= min_h;
 		if(glyph[i].x < 0) glyph[i].x = 0;
 	}
 	uint8_t max_h = 0;
 	for (uint16_t i = 0; i < glyph_count; i++) {
-		int bottom = glyph[i].y + glyph[i].h;
-		if (bottom > max_h) max_h = bottom;
+		if(glyph[i].h) {
+			int bottom = glyph[i].y + glyph[i].h;
+			if(bottom > max_h) max_h = bottom;
+		}
 	}
 	printf("Detected font height: %u px\n", max_h);
 	if(max_h < pad_height) {

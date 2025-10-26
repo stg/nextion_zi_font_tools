@@ -1,3 +1,5 @@
+//  DS Prototyp 2025 D.W.Taylor [senseitg@gmail.com]
+
 #include <stdint.h>
 
 typedef struct {
